@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 
 function UploadPage() {
     const [title, setTitle] = useState('');
@@ -20,7 +21,7 @@ function UploadPage() {
       try {
 
         const uploadUrlResponse = await fetch(
-          "http://localhost:3000/videos/upload-url",
+          `${API_URL}/videos/upload-url`,
           {
             method: "POST",
             headers: {
@@ -47,7 +48,7 @@ function UploadPage() {
         }
 
         const videoUrl = `https://pub-c9ff9a748a50481087cad3a2e54269bb.r2.dev/${objectKey}`;
-        await fetch("http://localhost:3000/videos", {
+        await fetch(`${API_URL}/videos`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
