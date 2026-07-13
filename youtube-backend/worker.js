@@ -42,10 +42,11 @@ async function processJobs() {
       console.log("Processing job", job.id);
 
       const { videoId, videoUrl } = job.payload;
+      const tempDir = ensureTempDirectory();
 
-      const videoPath = path.join(__dirname, "./temp", `${videoId}.mp4`);
+      const videoPath = path.join(tempDir, `${videoId}.mp4`);
 
-      const thumbnailPath = path.join(__dirname, "./temp", `${videoId}.jpg`);
+      const thumbnailPath = path.join(tempDir, `${videoId}.jpg`);
 
       await downloadVideo(videoUrl, videoPath);
 
@@ -98,6 +99,21 @@ async function processJobs() {
       );
     }
   }
+}
+
+function ensureTempDirectory() {
+  const tempDir = path.join(
+    process.cwd(),
+    "temp"
+  );
+
+  if (!fs.existsSync(tempDir)) {
+    fs.mkdirSync(tempDir, {
+      recursive: true,
+    });
+  }
+
+  return tempDir;
 }
 
 processJobs();
