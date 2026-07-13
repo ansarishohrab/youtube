@@ -48,8 +48,10 @@ async function processJobs() {
 
       const thumbnailPath = path.join(tempDir, `${videoId}.jpg`);
 
+      console.log("Downloading video from", videoUrl, "to", videoPath);
       await downloadVideo(videoUrl, videoPath);
 
+      console.log("Generating thumbnail for", videoPath);
       await generateThumbnail(videoPath, thumbnailPath);
 
       const duration = await getDuration(videoPath);
