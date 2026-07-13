@@ -107,6 +107,9 @@ function ensureTempDirectory() {
     "temp"
   );
 
+  console.log("process.cwd()", process.cwd());
+  console.log("tempDir", tempDir);
+
   if (!fs.existsSync(tempDir)) {
     fs.mkdirSync(tempDir, {
       recursive: true,
