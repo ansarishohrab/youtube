@@ -1,6 +1,6 @@
 import type { Video } from '../types/video.types';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 
 export const getVideos = async (search?: string): Promise<Video[]> => {
     const url = search ? `${API_URL}/videos?search=${encodeURIComponent(search)}` : `${API_URL}/videos`;
