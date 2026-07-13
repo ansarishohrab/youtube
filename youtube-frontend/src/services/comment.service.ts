@@ -18,13 +18,15 @@ export async function createComment(
   videoId: number,
   content: string
 ) {
+  const token = localStorage.getItem("token");
   const response = await fetch(
     `${API_URL}/videos/${videoId}/comments`,
     {
       method: "POST",
       headers: {
         "Content-Type":
-          "application/json"
+          "application/json",
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         content

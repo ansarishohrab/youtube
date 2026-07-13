@@ -30,11 +30,15 @@ export const getVideoById = async (
 export async function likeVideo(
   id: number
 ) {
+  const token = localStorage.getItem("token");
   const response =
     await fetch(
       `${API_URL}/videos/${id}/like`,
       {
-        method: "POST"
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }
     );
 
