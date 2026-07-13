@@ -19,12 +19,14 @@ function UploadPage() {
       setUploading(true);
 
       try {
+        const token = localStorage.getItem("token");
 
         const uploadUrlResponse = await fetch(
           `${API_URL}/videos/upload-url`,
           {
             method: "POST",
             headers: {
+              Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -51,6 +53,7 @@ function UploadPage() {
         await fetch(`${API_URL}/videos`, {
           method: "POST",
           headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
