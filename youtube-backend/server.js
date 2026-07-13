@@ -14,7 +14,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://youtube-9tzpi36vp-sohrabalam.vercel.app",
+      "https://youtube-chi-drab.vercel.app/",
     ],
   }),
 );
