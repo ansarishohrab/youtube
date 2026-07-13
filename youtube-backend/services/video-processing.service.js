@@ -1,5 +1,6 @@
 const fs = require("fs");
 const axios = require("axios");
+const path = require("path");
 const ffmpeg = require("fluent-ffmpeg");
 
 async function downloadVideo(url, outputPath) {
@@ -24,12 +25,9 @@ function generateThumbnail(videoPath, thumbnailPath) {
     ffmpeg(videoPath)
       .screenshots({
         timestamps: ["5"],
-        filename: thumbnailPath.split("\\").pop(),
-        folder: thumbnailPath.substring(
-          0,
-          thumbnailPath.lastIndexOf("\\")
-        ),
-        size: "640x360"
+        filename: path.basename(thumbnailPath),
+        folder: path.dirname(thumbnailPath),
+        size: "640x360",
       })
       .on("end", resolve)
       .on("error", reject);
